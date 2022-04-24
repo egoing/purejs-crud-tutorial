@@ -31,12 +31,21 @@
                 {id:2, title:'css', body:'css is ...'},
                 {id:3, title:'javascript', body:'javascript is ...'}
             ]
+            function nav(){
+                let tag = '';
+                for(let i=0; i<topics.length; i++){
+                    let t = topics[i];
+                    tag = tag + `<li><a href="/read/${t.id}">${t.title}</a></li>`;
+                }
+                document.querySelector('nav>ol').innerHTML = tag;
+            }
             function welcome(){}
             function read(){}
             function create(){}
             function update(){}
             function del(){}
             function control(){}
+            nav();
         </script>
     </body>
 </html>
