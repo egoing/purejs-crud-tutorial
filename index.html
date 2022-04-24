@@ -94,13 +94,46 @@
                     </form>
                 `;
             }
-            function update(){}
+            function update(){
+                let title;
+                let body;
+                for(let i=0; i<topics.length; i++){
+                    let t = topics[i];
+                    if(t.id === selectedId){
+                        title = t.title;
+                        body = t.body;
+                        break;
+                    }
+                }
+                document.querySelector('article').innerHTML = `
+                    <h2>Update</h2>
+                    <form onsubmit="
+                        event.preventDefault();
+                        let _title = event.target.title.value;
+                        let _body = event.target.body.value;
+                        for(let i=0; i<topics.length; i++){
+                            let t = topics[i];
+                            if(t.id === selectedId){
+                                t.title = _title;
+                                t.body = _body;
+                                break;
+                            }
+                        }
+                        read();
+                        nav();
+                    ">
+                        <p><input type="text" placeholder="제목" name="title" value="${title}"></p>
+                        <p><textarea placeholder="본문" name="body">${body}</textarea></p>
+                        <p><input type="submit" value="수정"></p>
+                    </form>
+                `;
+            }
             function del(){}
             function control(){
                 let contextUI = '';
                 if(selectedId !== null) {
                     contextUI = `
-                        <li><a href="/update">update</a></li>
+                        <li><a href="/update" onclick="event.preventDefault(); update();">update</a></li>
                         <li><input type="button" value="delete"></li>
                     `;
                 }
