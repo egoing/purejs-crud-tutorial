@@ -70,9 +70,16 @@
             function create(){}
             function update(){}
             function del(){}
-            function control(){}
+            function control(){
+                document.querySelector('#control').innerHTML = `
+                    <li><a href="/create">create</a></li>
+                    <li><a href="/update">update</a></li>
+                    <li><input type="button" value="delete"></li>
+                `;
+            }
             nav();
             welcome();
+            control();
         </script>
     </body>
 </html>
