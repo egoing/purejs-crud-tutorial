@@ -128,13 +128,26 @@
                     </form>
                 `;
             }
-            function del(){}
+            function del(){
+                let newTopics = [];
+                for(let i=0; i<topics.length; i++){
+                    let t = topics[i];
+                    if(t.id !== selectedId){
+                        newTopics.push(t);
+                    }
+                }
+                topics = newTopics;
+                nav();
+                welcome();
+                selectedId = null;
+                control();
+            }
             function control(){
                 let contextUI = '';
                 if(selectedId !== null) {
                     contextUI = `
                         <li><a href="/update" onclick="event.preventDefault(); update();">update</a></li>
-                        <li><input type="button" value="delete"></li>
+                        <li><input type="button" value="delete" onclick="event.preventDefault(); del();"></li>
                     `;
                 }
                 document.querySelector('#control').innerHTML = `
