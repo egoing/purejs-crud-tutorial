@@ -2,7 +2,12 @@
 <html>
     <body>
         <header>
-            <h1><a href="/" onclick="event.preventDefault(); welcome();">WEB</a></h1>
+            <h1><a href="/" onclick="
+                event.preventDefault(); 
+                welcome();
+                selectedId = null;
+                control();
+            ">WEB</a></h1>
         </header>
         <nav>
             <ol>
@@ -43,6 +48,7 @@
                                 event.preventDefault();
                                 selectedId = ${t.id};
                                 read();
+                                control();
                             ">
                                 ${t.title}
                             </a>
@@ -91,15 +97,20 @@
             function update(){}
             function del(){}
             function control(){
+                let contextUI = '';
+                if(selectedId !== null) {
+                    contextUI = `
+                        <li><a href="/update">update</a></li>
+                        <li><input type="button" value="delete"></li>
+                    `;
+                }
                 document.querySelector('#control').innerHTML = `
                     <li><a href="/create" onclick="event.preventDefault(); create();">create</a></li>
-                    <li><a href="/update">update</a></li>
-                    <li><input type="button" value="delete"></li>
+                    ${contextUI}
                 `;
             }
             nav();
-            // welcome();
-            create();
+            welcome();
             control();
         </script>
     </body>
