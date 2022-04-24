@@ -39,13 +39,19 @@
                 }
                 document.querySelector('nav>ol').innerHTML = tag;
             }
-            function welcome(){}
+            function welcome(){
+                document.querySelector('article').innerHTML = `
+                    <h2>Welcome</h2>
+                    Hello, WEB!
+                `;
+            }
             function read(){}
             function create(){}
             function update(){}
             function del(){}
             function control(){}
             nav();
+            welcome();
         </script>
     </body>
 </html>
