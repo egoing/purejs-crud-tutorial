@@ -31,6 +31,7 @@
                 {id:2, title:'css', body:'css is ...'},
                 {id:3, title:'javascript', body:'javascript is ...'}
             ]
+            let selectedId = null;
             function nav(){
                 let tag = '';
                 for(let i=0; i<topics.length; i++){
@@ -39,6 +40,7 @@
                         <li>
                             <a href="/read/${t.id}" onclick="
                                 event.preventDefault();
+                                selectedId = ${t.id};
                                 read();
                             ">
                                 ${t.title}
@@ -54,7 +56,16 @@
                 `;
             }
             function read(){
-                document.querySelector('article').innerHTML = `READ!!`;
+                for(let i=0; i<topics.length; i++){
+                    let t = topics[i];
+                    if(t.id === selectedId){
+                        document.querySelector('article').innerHTML = `
+                            <h2>${t.title}</h2>
+                            ${t.body}
+                        `;
+                        break;
+                    }
+                }
             }
             function create(){}
             function update(){}
