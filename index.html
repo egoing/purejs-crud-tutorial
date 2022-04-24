@@ -32,6 +32,7 @@
                 {id:3, title:'javascript', body:'javascript is ...'}
             ]
             let selectedId = null;
+            let nextId = 4;
             function nav(){
                 let tag = '';
                 for(let i=0; i<topics.length; i++){
@@ -67,18 +68,38 @@
                     }
                 }
             }
-            function create(){}
+            function create(){
+                document.querySelector('article').innerHTML = `
+                    <h2>Create</h2>
+                    <form onsubmit="
+                        event.preventDefault();
+                        let t = event.target.title.value;
+                        let b = event.target.body.value;
+                        let newTopic = {id:nextId, title:t, body:b};
+                        topics.push(newTopic);
+                        selectedId = nextId;
+                        read();
+                        nextId = nextId + 1;
+                        nav();
+                    ">
+                        <p><input type="text" placeholder="제목" name="title"></p>
+                        <p><textarea placeholder="본문" name="body"></textarea></p>
+                        <p><input type="submit" value="저장"></p>
+                    </form>
+                `;
+            }
             function update(){}
             function del(){}
             function control(){
                 document.querySelector('#control').innerHTML = `
-                    <li><a href="/create">create</a></li>
+                    <li><a href="/create" onclick="event.preventDefault(); create();">create</a></li>
                     <li><a href="/update">update</a></li>
                     <li><input type="button" value="delete"></li>
                 `;
             }
             nav();
-            welcome();
+            // welcome();
+            create();
             control();
         </script>
     </body>
